@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DinnerApp.Contracts.Authentication;
 using DinnerApp.Application.Services.Authentication;
-
+using DinnerApp.Api.Filters;
 
 namespace DinnerApp.Api.Controllers;
 

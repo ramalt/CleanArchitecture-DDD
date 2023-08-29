@@ -1,3 +1,5 @@
+using DinnerApp.Api.Filters;
+// using DinnerApp.Api.Middleware;
 using DinnerApp.Application;
 using DinnerApp.Infrastructure;
 
@@ -5,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(opt => opt.Filters.Add<ErrorHandlingFilterAttribute>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -23,6 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
