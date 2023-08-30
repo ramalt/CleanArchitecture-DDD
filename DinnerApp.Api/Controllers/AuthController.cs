@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using DinnerApp.Contracts.Authentication;
 using DinnerApp.Application.Services.Authentication;
-using DinnerApp.Api.Filters;
+using MediatR;
+using DinnerApp.Application.Authentication.Commands.Register;
+using DinnerApp.Application.Authentication.Queries.Login;
 
 namespace DinnerApp.Api.Controllers;
 
@@ -9,22 +11,24 @@ namespace DinnerApp.Api.Controllers;
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
+    private readonly ISender _mediator;
 
-    private readonly IAuthenticationService _authenticationService;
-
-    public AuthController(IAuthenticationService authenticationService)
+    public AuthController(ISender mediator)
     {
-        _authenticationService = authenticationService;
+        _mediator = mediator;
     }
 
     [HttpPost("register")]
-    public IActionResult Register(RegisterRequest request)
+    public async Task<IActionResult> Register(RegisterRequest request)
     {
-        AuthResult authResult = _authenticationService.Register(
+
+        var command = new RegisterCommand(
             request.FirstName,
             request.LastName,
             request.Email,
             request.Password);
+
+        AuthResult authResult = await _mediator.Send(command);
 
         AuthResponse response = new AuthResponse(
             authResult.Id,
@@ -37,11 +41,10 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public IActionResult Login(LoginRequest request)
+    public async Task<IActionResult> Login(LoginRequest request)
     {
-        AuthResult authResult = _authenticationService.Login(
-            request.Email,
-            request.Password);
+        var query = new LoginQuery(request.Email, request.Password);
+        AuthResult authResult = await _mediator.Send(query);
 
         AuthResponse response = new AuthResponse(
             authResult.Id,
