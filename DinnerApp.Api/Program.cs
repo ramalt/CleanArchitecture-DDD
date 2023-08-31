@@ -1,7 +1,7 @@
 using DinnerApp.Api.Filters;
-// using DinnerApp.Api.Middleware;
 using DinnerApp.Application;
 using DinnerApp.Infrastructure;
+using DinnerApp.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 // Service Registration
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddPresentation();
 
 var app = builder.Build();
 

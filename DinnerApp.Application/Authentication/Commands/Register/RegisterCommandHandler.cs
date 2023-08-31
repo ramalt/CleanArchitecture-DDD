@@ -40,6 +40,6 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthResul
         //3. Create JWT 
         string token = _jwtGenerator.GenerateToken(user);
 
-        return new AuthResult(user.Id, command.FirstName, command.LastName, command.Email, token);
+        return new AuthResult(user, token);
     }
 }

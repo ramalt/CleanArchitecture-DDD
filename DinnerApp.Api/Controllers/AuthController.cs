@@ -4,6 +4,7 @@ using DinnerApp.Application.Services.Authentication;
 using MediatR;
 using DinnerApp.Application.Authentication.Commands.Register;
 using DinnerApp.Application.Authentication.Queries.Login;
+using MapsterMapper;
 
 namespace DinnerApp.Api.Controllers;
 
@@ -12,47 +13,36 @@ namespace DinnerApp.Api.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly ISender _mediator;
+    private readonly IMapper _mapper;
 
-    public AuthController(ISender mediator)
+    public AuthController(ISender mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
-
-        var command = new RegisterCommand(
-            request.FirstName,
-            request.LastName,
-            request.Email,
-            request.Password);
+        var command = _mapper.Map<RegisterCommand>(request);
 
         AuthResult authResult = await _mediator.Send(command);
 
-        AuthResponse response = new AuthResponse(
-            authResult.Id,
-            authResult.FirstName,
-            authResult.LastName,
-            authResult.Email,
-            authResult.Token);
+        return Ok(_mapper.Map<AuthResponse>(authResult));
 
-        return Ok(response);
+
     }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        var query = new LoginQuery(request.Email, request.Password);
+
+        var query = _mapper.Map<LoginQuery>(request);
+
         AuthResult authResult = await _mediator.Send(query);
 
-        AuthResponse response = new AuthResponse(
-            authResult.Id,
-            authResult.FirstName,
-            authResult.LastName,
-            authResult.Email,
-            authResult.Token);
+        return Ok(_mapper.Map<AuthResponse>(authResult));
 
-        return Ok(response);
+
     }
 }

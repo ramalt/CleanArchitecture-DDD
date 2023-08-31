@@ -1,7 +1,5 @@
+using DinnerApp.Domain.Entities;
+
 namespace DinnerApp.Application.Services.Authentication;
 
-public record AuthResult(Guid Id,
-                         string FirstName,
-                         string LastName,
-                         string Email,
-                         string Token);
+public record AuthResult(User user, string Token);

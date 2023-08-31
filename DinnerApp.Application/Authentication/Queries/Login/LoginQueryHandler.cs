@@ -19,7 +19,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResult>
 
     async Task<AuthResult> IRequestHandler<LoginQuery, AuthResult>.Handle(LoginQuery query, CancellationToken cancellationToken)
     {
-         //1. check user exist
+        //1. check user exist
         if (_userRepository.GetUserByEmail(query.Email) is not User user)
         {
             throw new Exception("Email does not exist.");
@@ -34,6 +34,6 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResult>
         //3. create JWT
         string token = _jwtGenerator.GenerateToken(user);
 
-        return new AuthResult(user.Id, user.FirstName, user.LastName, user.Email, token);
+        return new AuthResult(user, token);
     }
 }
