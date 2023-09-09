@@ -1,4 +1,3 @@
-using DinnerApp.Application.Authentication.Commands.Register;
 using DinnerApp.Application.Services.Authentication;
 using DinnerApp.Domain.Entities;
 using FluentValidation;
@@ -6,17 +5,17 @@ using MediatR;
 
 namespace DinnerApp.Application.Common.Behaviors;
 
-public class ValidationBehavior : IPipelineBehavior<RegisterCommand, AuthResult>
+public class ValidationBehavior<TRequset, TResponse> : IPipelineBehavior<TRequset, TResponse> where TRequset : IRequest<TResponse> where TResponse : AuthResult
 {
-    private readonly IValidator<RegisterCommand> _validator;
+    private readonly IValidator<TRequset> _validator;
 
-    public ValidationBehavior(IValidator<RegisterCommand> validator)
+    public ValidationBehavior(IValidator<TRequset> validator)
     {
         _validator = validator;
     }
 
-    public async Task<AuthResult> Handle(RegisterCommand request,
-                                   RequestHandlerDelegate<AuthResult> next,
+    public async Task<TResponse> Handle(TRequset request,
+                                   RequestHandlerDelegate<TResponse> next,
                                    CancellationToken cancellationToken)
     {
 
@@ -30,7 +29,7 @@ public class ValidationBehavior : IPipelineBehavior<RegisterCommand, AuthResult>
         var errorMessages = validationResult.Errors.Select(error => error.ErrorMessage).ToList();
 
         // errorMessages listesini döndürebilirsiniz
-        return new AuthResult(default(User), "", errorMessages);
+        return (dynamic)new AuthResult(default, "", errorMessages);
 
 
 

@@ -1,5 +1,4 @@
 using System.Reflection;
-using DinnerApp.Application.Authentication.Commands.Register;
 using DinnerApp.Application.Common.Behaviors;
 using DinnerApp.Application.Services.Authentication;
 using FluentValidation;
@@ -15,8 +14,10 @@ public static class DependencyInjection
     services.AddMediatR(typeof(DependencyInjection).Assembly);
 
     //validation 
-    services.AddScoped<IPipelineBehavior<RegisterCommand, AuthResult>, ValidationBehavior>();
+    // services.AddScoped<IPipelineBehavior<RegisterCommand, AuthResult>, ValidationBehavior>();
     // services.AddScoped<IValidator<RegisterCommand>, RegisterCommandValidation>();
+
+    services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
     services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
     return services;
   }
