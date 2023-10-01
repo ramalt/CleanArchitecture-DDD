@@ -1,4 +1,4 @@
-using DinnerApp.Domain.Entities;
+using DinnerApp.Domain.Models.User;
 
 namespace DinnerApp.Application.Common.Interfaces.Auth;
 

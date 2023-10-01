@@ -2,7 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using DinnerApp.Application.Common.Interfaces.Auth;
-using DinnerApp.Domain.Entities;
+using DinnerApp.Domain.Models.User;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 

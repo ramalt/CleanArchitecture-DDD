@@ -1,4 +1,4 @@
-namespace DinnerApp.Domain.Entities;
+namespace DinnerApp.Domain.Models.User;
 
 public class User
 {

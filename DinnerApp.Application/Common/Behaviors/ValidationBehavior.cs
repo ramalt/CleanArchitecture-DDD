@@ -1,5 +1,5 @@
 using DinnerApp.Application.Services.Authentication;
-using DinnerApp.Domain.Entities;
+using DinnerApp.Domain.Models.User;
 using FluentValidation;
 using MediatR;
 

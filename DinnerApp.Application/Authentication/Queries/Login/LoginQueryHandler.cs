@@ -1,7 +1,8 @@
 using DinnerApp.Application.Common.Interfaces.Auth;
 using DinnerApp.Application.Common.Interfaces.Persistence;
 using DinnerApp.Application.Services.Authentication;
-using DinnerApp.Domain.Entities;
+using DinnerApp.Domain.Models.User;
+
 using MediatR;
 
 namespace DinnerApp.Application.Authentication.Queries.Login;
