@@ -35,6 +35,6 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResult>
         //3. create JWT
         string token = _jwtGenerator.GenerateToken(user);
 
-        return new AuthResult(user, token, null);
+        return new AuthResult(user, token);
     }
 }

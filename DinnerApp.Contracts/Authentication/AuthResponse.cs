@@ -5,5 +5,4 @@ public record AuthResponse(Guid Id,
                            string FirstName,
                            string LastName,
                            string Email,
-                           string Token,
-                           List<string> Errors);
+                           string Token);

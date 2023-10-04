@@ -1,5 +1,5 @@
 using DinnerApp.Application.Services.Authentication;
-using DinnerApp.Domain.Models.User;
+
 using FluentValidation;
 using MediatR;
 
@@ -21,15 +21,15 @@ public class ValidationBehavior<TRequset, TResponse> : IPipelineBehavior<TRequse
 
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
-        if (validationResult.IsValid)
+        if (!validationResult.IsValid)
         {
-            return await next();
+            var errorMessages = validationResult.Errors.Select(error => error.ErrorMessage).ToList();
+            throw new Exception(errorMessages.ToString());
         }
+            return await next();
 
-        var errorMessages = validationResult.Errors.Select(error => error.ErrorMessage).ToList();
 
-        // errorMessages listesini döndürebilirsiniz
-        return (dynamic)new AuthResult(default, "", errorMessages);
+        // return (dynamic)new AuthResult(default, "");
 
 
 
