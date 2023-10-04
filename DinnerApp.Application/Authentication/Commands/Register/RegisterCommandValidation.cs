@@ -1,16 +1,14 @@
-using System.Data;
 using FluentValidation;
 
-namespace DinnerApp.Application.Authentication.Commands.Register
+namespace DinnerApp.Application.Authentication.Commands.Register;
+
+public class RegisterCommandValidation : AbstractValidator<RegisterCommand>
 {
-    public class RegisterCommandValidation : AbstractValidator<RegisterCommand>
+    public RegisterCommandValidation()
     {
-        public RegisterCommandValidation()
-        {
-            RuleFor(x => x.FirstName).NotEmpty();
-            RuleFor(x => x.LastName).NotEmpty();
-            RuleFor(x => x.Email).NotEmpty();
-            RuleFor(x => x.Password).NotEmpty();
-        }
+        RuleFor(x => x.FirstName).NotEmpty();
+        RuleFor(x => x.LastName).NotEmpty();
+        RuleFor(x => x.Email).NotEmpty();
+        RuleFor(x => x.Password).NotEmpty();
     }
 }
