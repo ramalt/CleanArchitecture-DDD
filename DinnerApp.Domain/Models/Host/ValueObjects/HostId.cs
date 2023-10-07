@@ -6,13 +6,8 @@ public record HostId
 
     public HostId(Guid value) => Value = value;
 
-    public static HostId CreateUnique()
+    public static HostId Create(string id)
     {
-        return new(Guid.NewGuid());
-    }
-
-    public static HostId Create(Guid id)
-    {
-        return new(id);
+        return new(Guid.Parse(id));
     }
 }

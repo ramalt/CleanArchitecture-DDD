@@ -16,17 +16,19 @@ public class MenuController : ControllerBase
     private readonly IMapper _mapper;
     private readonly ISender _mediator;
 
-    public MenuController(IMapper mapper, ISender mediator)
+       public MenuController(IMapper mapper, ISender mediator)
     {
         _mapper = mapper;
         _mediator = mediator;
     }
 
     [HttpPost("create")]
-    public async Task<IActionResult> CreateMenu(CreateMenuRequest request,[FromRoute] Guid hostId)
+    public async Task<IActionResult> CreateMenu(CreateMenuRequest request,[FromRoute] string hostId)
     {
         var command = _mapper.Map<CreateMenuCommand>((request, hostId));
         var created = await _mediator.Send(command);
-        return Ok(request);
+
+        var mapped = _mapper.Map<MenuResponse>(created);
+        return Ok(created);
     }
 }

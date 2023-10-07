@@ -1,4 +1,5 @@
 using System.Text;
+using DinnerApp.Application.Common.Interfaces;
 using DinnerApp.Application.Common.Interfaces.Auth;
 using DinnerApp.Application.Common.Interfaces.Persistence;
 using DinnerApp.Infrastructure.Auth;
@@ -17,9 +18,14 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager config)
     {
         services.AddAuth(config);
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddPersistence();
 
         return services;
+    }
+    public static void AddPersistence(this IServiceCollection services)
+    {
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IMenuRepository, MenuRepository>();
     }
     public static IServiceCollection AddAuth(this IServiceCollection services, ConfigurationManager config)
     {

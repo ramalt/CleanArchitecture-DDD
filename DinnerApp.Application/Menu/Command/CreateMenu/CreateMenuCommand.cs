@@ -1,14 +1,14 @@
-using DinnerApp.Domain.Models.Host.ValueObjects;
-using MenuEntity = DinnerApp.Domain.Models.MenuAggregate.Menu;
+using MenuAggregate = DinnerApp.Domain.Models.MenuAggregate.Menu;
 
 using MediatR;
+using DinnerApp.Domain.Models.Host.ValueObjects;
 
 namespace DinnerApp.Application.Menu.Command.CreateMenu;
 
 public record CreateMenuCommand(string Name,
                                 string Description,
-                                Guid HostId,
-                                List<MenuSectionCommand> Sections) : IRequest<MenuEntity>;
+                                string HostId,
+                                List<MenuSectionCommand> Sections) : IRequest<MenuAggregate>;
 
 public record MenuSectionCommand(string Name,
                           string Description,
