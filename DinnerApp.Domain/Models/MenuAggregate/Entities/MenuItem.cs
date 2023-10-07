@@ -1,7 +1,7 @@
 using DinnerApp.Domain.Abstracts;
-using DinnerApp.Domain.Models.Menu.ValueObjects;
+using DinnerApp.Domain.Models.MenuAggregate.ValueObjects;
 
-namespace DinnerApp.Domain.Models.Menu.Entities;
+namespace DinnerApp.Domain.Models.MenuAggregate.Entities;
 
 public sealed class MenuItem : Entity<MenuItemId>
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DinnerApp.Domain.Models.Menu.ValueObjects;
+namespace DinnerApp.Domain.Models.MenuAggregate.ValueObjects;
 
 public record MenuItemId
 {

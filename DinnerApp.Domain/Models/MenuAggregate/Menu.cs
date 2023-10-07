@@ -1,11 +1,11 @@
 using DinnerApp.Domain.Abstracts;
 using DinnerApp.Domain.Models.Dinner.ValueObjects;
 using DinnerApp.Domain.Models.Host.ValueObjects;
-using DinnerApp.Domain.Models.Menu.Entities;
-using DinnerApp.Domain.Models.Menu.ValueObjects;
+using DinnerApp.Domain.Models.MenuAggregate.Entities;
+using DinnerApp.Domain.Models.MenuAggregate.ValueObjects;
 using DinnerApp.Domain.Models.MenuReview.ValueObjects;
 
-namespace DinnerApp.Domain.Models.Menu;
+namespace DinnerApp.Domain.Models.MenuAggregate;
 
 public sealed class Menu : AggregateRoot<MenuId>
 {
@@ -20,7 +20,7 @@ public sealed class Menu : AggregateRoot<MenuId>
 
     public IReadOnlyList<MenuSection> MenuSections => _sections.AsReadOnly();
     public IReadOnlyList<DinnerId> DinnerIds => _dinnerIds.AsReadOnly();
-    public IReadOnlyList<MenuReviewId> menuReviewIds => _menuReviews.AsReadOnly();
+    public IReadOnlyList<MenuReviewId> MenuReviewIds => _menuReviews.AsReadOnly();
 
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }

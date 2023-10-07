@@ -1,7 +1,7 @@
 using DinnerApp.Domain.Abstracts;
-using DinnerApp.Domain.Models.Menu.ValueObjects;
+using DinnerApp.Domain.Models.MenuAggregate.ValueObjects;
 
-namespace DinnerApp.Domain.Models.Menu.Entities;
+namespace DinnerApp.Domain.Models.MenuAggregate.Entities;
 
 public sealed class MenuSection : Entity<MenuSectionId>
 {
@@ -16,9 +16,11 @@ public sealed class MenuSection : Entity<MenuSectionId>
         Description = description;
     }
 
-    public static MenuSection Create(string name, string description)
+    public static MenuSection Create(string name, string description, List<MenuItem> items)
     {
-        return new(MenuSectionId.CreateUnique(), name, description);
+        MenuSection section =new(MenuSectionId.CreateUnique(), name, description);
+        section._items.AddRange(items);
+        return section;
     }
 
 }

@@ -1,4 +1,4 @@
-namespace DinnerApp.Domain.Models.Menu.ValueObjects;
+namespace DinnerApp.Domain.Models.MenuAggregate.ValueObjects;
 
 public record MenuSectionId
 {
