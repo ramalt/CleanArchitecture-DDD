@@ -23,7 +23,7 @@ public class MenuController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<IActionResult> CreateMenu(CreateMenuRequest request,[FromRoute] string hostId)
+    public async Task<IActionResult> CreateMenu(CreateMenuRequest request,[FromRoute] Guid hostId)
     {
         var command = _mapper.Map<CreateMenuCommand>((request, hostId));
         var created = await _mediator.Send(command);

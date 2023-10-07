@@ -6,8 +6,9 @@ public record HostId
 
     public HostId(Guid value) => Value = value;
 
-    public static HostId Create(string id)
+    public static HostId Create(Guid id)
     {
-        return new(Guid.Parse(id));
+        // return new(Guid.Parse(id));
+        return new(id);
     }
 }

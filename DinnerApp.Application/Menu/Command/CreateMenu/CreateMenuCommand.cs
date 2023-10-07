@@ -7,7 +7,7 @@ namespace DinnerApp.Application.Menu.Command.CreateMenu;
 
 public record CreateMenuCommand(string Name,
                                 string Description,
-                                string HostId,
+                                Guid HostId,
                                 List<MenuSectionCommand> Sections) : IRequest<MenuAggregate>;
 
 public record MenuSectionCommand(string Name,
